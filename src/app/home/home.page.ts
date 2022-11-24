@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Camera, CameraResultType } from '@capacitor/camera';
-
+import { TestPlugin } from '@academy/test-plugin';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -31,19 +31,25 @@ export class HomePage {
     }
   }
 
-  startDownload() {
-    setInterval(() => {
-      this.buffer += 0.06;
-      this.progress += 0.06;
+  async startDownload() {
+    // setInterval(() => {
+    //   this.buffer += 0.06;
+    //   this.progress += 0.06;
 
-      // Reset the progress bar when it reaches 100%
-      // to continuously show the demo
-      if (this.progress > 1) {
-        setTimeout(() => {
-          this.buffer = 0.06;
-          this.progress = 0;
-        }, 1000);
-      }
-    }, 1000);
+    //   // Reset the progress bar when it reaches 100%
+    //   // to continuously show the demo
+    //   if (this.progress > 1) {
+    //     setTimeout(() => {
+    //       this.buffer = 0.06;
+    //       this.progress = 0;
+    //     }, 1000);
+    //   }
+    // }, 1000);
+
+    const result = await TestPlugin.echo({
+      value: 'Hello',
+    });
+
+    alert(result.value);
   }
 }
